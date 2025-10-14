@@ -51,13 +51,15 @@ export default function Navbar() {
             name: "Faculty",
             path: "/faculty",
             icon: <UserCheck />,
-            description: "Meet the distinguished faculty supporting our journey.",
+            description:
+              "Meet the distinguished faculty supporting our journey.",
           },
           {
             name: "Societies",
             path: "/societies",
             icon: <Landmark />,
-            description: "Explore our vibrant IEEE communities and initiatives.",
+            description:
+              "Explore our vibrant IEEE communities and initiatives.",
           },
           {
             name: "Annual Report",
@@ -206,18 +208,6 @@ export default function Navbar() {
             )}
           </motion.button>
 
-          {/* JOIN NOW Button */}
-          <motion.a
-            href="https://www.ieee.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block px-5 py-2 rounded-lg text-lg font-semibold shadow-md bg-ieee-blue text-white hover:bg-blue-700 hover:shadow-lg transition"
-          >
-            JOIN NOW
-          </motion.a>
-
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
@@ -232,88 +222,89 @@ export default function Navbar() {
       </div>
 
       <AnimatePresence>
-  {isOpen && (
-    <motion.div
-      initial={{ x: "100%" }}
-      animate={{ x: 0 }}
-      exit={{ x: "100%" }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="fixed inset-0 z-50 bg-gradient-to-br from-white to-gray-200 dark:from-[#0A1931] dark:to-[#1E3A8A] h-screen shadow-2xl flex flex-col p-8"
-    >
-      {/* Close Button */}
-      <button
-        className="absolute top-4 right-4 p-3 rounded-full bg-ieee-blue hover:bg-[#60A5FA] dark:bg-[#1E3A8A] dark:hover:bg-[#3B82F6] transition-all shadow-xl ring-2 ring-white dark:ring-[#0A1931] scale-110"
-        onClick={() => setIsOpen(false)}
-        aria-label="Close Menu"
-      >
-        <X className="w-6 h-6 text-white" />
-      </button>
-
-{/* Menu Items */}
-<div className="flex flex-col gap-10 mt-24">
-  {menuItems.map((item) => (
-    <div key={item.name} className="group">
-      {item.submenu ? (
-        <div>
-          <button
-            className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-wider 
-            hover:text-ieee-blue dark:hover:text-[#60A5FA] transition-all duration-300 w-full text-left"
-            onClick={() => handleSubMenuToggle(item.name)}
+        {isOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 bg-gradient-to-br from-white to-gray-200 dark:from-[#0A1931] dark:to-[#1E3A8A] h-screen shadow-2xl flex flex-col p-8"
           >
-            {item.name}
-          </button>
-
-          {/* Dropdown Content */}
-          {openSubMenu === item.name && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="ml-4 mt-3 flex flex-col gap-3"
+            {/* Close Button */}
+            <button
+              className="absolute top-4 right-4 p-3 rounded-full bg-ieee-blue hover:bg-[#60A5FA] dark:bg-[#1E3A8A] dark:hover:bg-[#3B82F6] transition-all shadow-xl ring-2 ring-white dark:ring-[#0A1931] scale-110"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close Menu"
             >
-              {item.submenu.map((sub) => (
-                <Link
-                  key={sub.name}
-                  to={sub.path}
-                  className="text-lg text-gray-700 dark:text-gray-300 hover:text-ieee-blue 
+              <X className="w-6 h-6 text-white" />
+            </button>
+
+            {/* Menu Items */}
+            <div className="flex flex-col gap-10 mt-24">
+              {menuItems.map((item) => (
+                <div key={item.name} className="group">
+                  {item.submenu ? (
+                    <div>
+                      <button
+                        className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-wider 
+            hover:text-ieee-blue dark:hover:text-[#60A5FA] transition-all duration-300 w-full text-left"
+                        onClick={() => handleSubMenuToggle(item.name)}
+                      >
+                        {item.name}
+                      </button>
+
+                      {/* Dropdown Content */}
+                      {openSubMenu === item.name && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="ml-4 mt-3 flex flex-col gap-3"
+                        >
+                          {item.submenu.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              to={sub.path}
+                              className="text-lg text-gray-700 dark:text-gray-300 hover:text-ieee-blue 
                   dark:hover:text-[#60A5FA] transition-all duration-200 pl-2 
                   border-l-4 border-transparent hover:border-ieee-blue dark:hover:border-[#60A5FA]"
-                  onClick={() => {
-                    setIsOpen(false); // Auto-close navbar on click
-                    handleSubMenuToggle(""); // Close submenu
-                  }}
-                >
-                  {sub.name}
-                </Link>
-              ))}
-            </motion.div>
-          )}
-        </div>
-      ) : (
-        <Link
-          to={item.path}
-          className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-wider 
+                              onClick={() => {
+                                setIsOpen(false); // Auto-close navbar on click
+                                handleSubMenuToggle(""); // Close submenu
+                              }}
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-wider 
           hover:text-ieee-blue dark:hover:text-[#60A5FA] transition-all duration-300"
-          onClick={() => setIsOpen(false)} // Auto-close navbar on click
-        >
-          {item.name}
-        </Link>
-      )}
-    </div>
-  ))}
-</div>
+                      onClick={() => setIsOpen(false)} // Auto-close navbar on click
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
 
-{/* Footer Links */}
-<div className="absolute bottom-8 w-full text-center">
-  <p className="text-base text-gray-500 dark:text-gray-400">
-    Powered by <span className="font-semibold text-ieee-blue">IEEE SB MUJ</span>
-  </p>
-</div>
-
-    </motion.div>
-  )}
-</AnimatePresence>
-
+            {/* Footer Links */}
+            <div className="absolute bottom-8 w-full text-center">
+              <p className="text-base text-gray-500 dark:text-gray-400">
+                Powered by{" "}
+                <span className="font-semibold text-ieee-blue">
+                  IEEE SB MUJ
+                </span>
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
